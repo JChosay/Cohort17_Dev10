@@ -1,8 +1,10 @@
+import java.awt.desktop.SystemEventListener;
+
 public class Exercise13 {
 
     public static void main(String[] args) {
 
-        int purchaseQuantity = 2;
+        int purchaseQuantity = 12;
         boolean hasCoupon = false;
 
         // 1. Declare a boolean variable hasDiscount.
@@ -11,5 +13,8 @@ public class Exercise13 {
         // 3. Print the result.
         // 4. Change the values of purchaseQuantity and hasCoupon to get both true and false results for hasDiscount
         // in different ways.
+
+        boolean hasDiscount = purchaseQuantity >= 6 || hasCoupon == true;
+        System.out.println(hasDiscount);
     }
 }

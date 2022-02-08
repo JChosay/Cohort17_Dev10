@@ -7,4 +7,13 @@ public class Exercise25 {
     // 4. Print the result.
     // 5. Change variable values to change the sentence. Ask a friend for random values to increase the chances
     // of something hilarious or kinda naughty.
+    public static void main(String[] args) {
+        String exclamation = "Jump",
+                adverb = "quickly",
+                noun = "elephant",
+                adjective = "wonderful";
+
+        System.out.println(exclamation + "! he said " + adverb + " as he jumped into his convertible " +
+                noun + " and drove off with his " + adjective + " wife.");
+    }
 }

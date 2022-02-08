@@ -10,7 +10,8 @@ public class Exercise24 {
         // 1. Use the replace method to replace all occurrences of "a" with "o" from knockKnock.
         // 2. Assign the result to a new variable.
         // 3. Print it.
-
+        String result = knockKnock.replace("a","o");
+        System.out.println(result);
         // Expected Output:
         // Knock, knock.
         // Who's there?
