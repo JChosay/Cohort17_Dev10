@@ -21,5 +21,60 @@ public class Exercise10 {
         // If a lbs/zone combo does not exist, print a warning message for the user.
 
         Scanner console = new Scanner(System.in);
+        int zone, lbs;
+        double rate;
+        System.out.print("Enter zone number: ");
+        zone = Integer.parseInt(console.nextLine());
+        System.out.print("Enter weight (whole number): ");
+        lbs = Integer.parseInt(console.nextLine());
+        switch (lbs){
+            case 1:
+                if(zone == 3)
+                    rate = 7.85;
+                else if (zone == 1 || zone == 2)
+                    rate = 7.50;
+                else
+                    rate = -1;
+                break;
+            case 2:
+                if(zone == 3)
+                    rate = 8.70;
+                else if (zone == 1 || zone == 2)
+                    rate = 8.25;
+                else
+                    rate = -1;
+                break;
+            case 3:
+                if(zone == 3)
+                    rate = 9.70;
+                else if (zone == 1 || zone == 2)
+                    rate = 8.70;
+                else
+                    rate = -1;
+                break;
+            case 4:
+                if(zone == 3)
+                    rate = 10.55;
+                else if (zone == 1 || zone == 2)
+                    rate = 9.20;
+                else
+                    rate = -1;
+                break;
+            case 5:
+                if(zone == 3)
+                    rate = 11.30;
+                else if (zone == 1 || zone == 2)
+                    rate = 10.20;
+                else
+                    rate = -1;
+                break;
+            default:
+                rate = -1;
+                break;
+        }
+        if (rate == -1)
+            System.out.println("The lbs/zone combo does not exist. Try again.");
+        else
+            System.out.printf("In zone %d a parcel with %d lbs has a rate of %.2f.", zone, lbs, rate);
     }
 }

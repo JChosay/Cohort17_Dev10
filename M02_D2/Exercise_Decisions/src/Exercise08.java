@@ -17,7 +17,12 @@ public class Exercise08 {
             opposite = "hot";
         } else if (word.equalsIgnoreCase("little")) {
             opposite = "big";
+        } else if (word.equalsIgnoreCase("far")) {
+            opposite = "near";
+        } else if (word.equalsIgnoreCase("bitter")) {
+            opposite = "sweet";
         }
+
 
         if (opposite == null) {
             System.out.printf("I don't have an opposite for %s.%n", word);

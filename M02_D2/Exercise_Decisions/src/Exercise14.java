@@ -22,6 +22,24 @@ public class Exercise14 {
             case 1:
                 System.out.println("I refuse to say \"a case of the Mondays\".");
                 break;
+            case 2:
+                System.out.println("Tired Tuesday.");
+                break;
+            case 3:
+                System.out.println("It's humpday (if you got the old meme).");
+                break;
+            case 4:
+                System.out.println("Thrilling Thursday.");
+                break;
+            case 5:
+                System.out.println("TGIF.");
+                break;
+            case 6:
+                System.out.println("Party Saturday.");
+                break;
+            case 7:
+                System.out.println("Sleep in Sunday.");
+                break;
             default:
                 System.out.println("I don't recognize that day.");
                 break;

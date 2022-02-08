@@ -20,5 +20,10 @@ public class Exercise06 {
         int shopperCount = Integer.parseInt(console.nextLine());
 
         // 1. Apply if/else here.
+        if ((snorkelerCount % 2) == 1){
+            shopperCount += snorkelerCount;
+            snorkelerCount = 0;
+        }
+        System.out.println("Snorklers: "+snorkelerCount + "\nShoppers: "+shopperCount);
     }
 }
