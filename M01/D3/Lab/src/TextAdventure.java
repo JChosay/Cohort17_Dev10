@@ -20,7 +20,6 @@ public class TextAdventure {
             if (gameOver)
                 System.out.println("Congratulations! You found all the items and survived until you got help!");
         } while (gameOver == false);
-        //printWin(String "win");
     }
 
     public static boolean gameStatus(boolean[] itemStatus)
@@ -87,6 +86,7 @@ public class TextAdventure {
                     loop = false;
                     break;
                 case 3:
+                    System.out.println("You decide to head back.");
                     loop = false;
                     break;
                 default:
@@ -120,6 +120,7 @@ public class TextAdventure {
                     loop = false;
                     break;
                 case 3:
+                    System.out.println("You decide to head back.");
                     loop = false;
                     break;
                 default:
