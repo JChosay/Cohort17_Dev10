@@ -13,6 +13,7 @@ public class Exercise17 {
         System.out.print("Enter number of columns: ");
         int column = Integer.parseInt(console.nextLine());
         System.out.print("Enter box character: ");
+
         System.out.print("Enter border character: ");
     }
 }
