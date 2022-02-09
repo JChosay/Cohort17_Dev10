@@ -6,6 +6,12 @@ public class Exercise15 {
         // One loop should represent rows and the other should represent columns.
         // 2. Change the row and column limit to change the shape of the box.
 
+        int row = 3, column = 3;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++)
+                System.out.print('#');
+            System.out.print('\n');
+        }
         // Expected Output (5X5)
         // #####
         // #####
