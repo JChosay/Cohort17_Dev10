@@ -13,7 +13,20 @@ public class Exercise17 {
         System.out.print("Enter number of columns: ");
         int column = Integer.parseInt(console.nextLine());
         System.out.print("Enter box character: ");
-
+        char box = console.nextLine().charAt(0);
         System.out.print("Enter border character: ");
+        char border = console.nextLine().charAt(0);
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++)
+                // top and bottom borders
+                if (i == 0 || i == (row - 1))
+                    System.out.print(border);
+                    // left and right borders
+                else if (j == 0 || j == (column - 1))
+                    System.out.print(border);
+                else
+                    System.out.print(box);
+            System.out.print('\n');
+        }
     }
 }
