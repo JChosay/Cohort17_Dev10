@@ -11,6 +11,28 @@ public class Exercise16 {
         // Its elements are guaranteed to be sorted ascending.
         // 1. Create a new int[] with capacity for all elements from `one` and `two`.
         // 2. "Merge" elements from `one` and `two` into the new array so that its values are sorted.
+        int[] combined = new int[one.length + two.length];
+        int oneIndex = 0, twoIndex = 0, combinedIndex = 0;
+
+        // mergesort
+        while (combinedIndex < combined.length)
+        {
+            if (oneIndex < one.length && twoIndex < two.length) {
+                if (one[oneIndex] < two[twoIndex])
+                    combined[combinedIndex++] = one[oneIndex++];
+                else
+                    combined[combinedIndex++] = two[twoIndex++];
+            } else {
+                // add any remaining elements to array
+                if (oneIndex < one.length)
+                    combined[combinedIndex++] = one[oneIndex++];
+                else
+                    combined[combinedIndex++] = two[twoIndex++];
+            }
+        }
+
+        for (int i = 0; i < combined.length; i++)
+            System.out.println(combined[i]);
 
          /* Pseudocode:
          Create an integer index for `one`, `two`, and the result array, all starting at 0.

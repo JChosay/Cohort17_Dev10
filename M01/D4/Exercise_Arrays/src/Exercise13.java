@@ -4,6 +4,18 @@ public class Exercise13 {
 
     public static void main(String[] args) {
         String[] statesOrTowns = makeRandomStateAndTownArray();
+        int numOfTowns = 0;
+        for (int i = 0; i < statesOrTowns.length; i++)
+            if (statesOrTowns[i].length() > 2)
+                numOfTowns++;
+        String[] towns = new String[numOfTowns];
+        for (int i = statesOrTowns.length - 1; i >= 0; i--)
+            if (statesOrTowns[i].length() > 2) {
+                towns[numOfTowns - 1] = statesOrTowns[i];
+                numOfTowns--;
+            }
+        for (int i = 0; i < towns.length; i++)
+            System.out.println(towns[i]);
 
         // The statesOrTowns array contains either state abbreviations or town names. You can distinguish state
         // abbreviations by their length. They're always two characters.
