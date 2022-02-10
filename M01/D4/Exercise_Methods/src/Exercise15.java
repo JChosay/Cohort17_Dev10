@@ -1,4 +1,27 @@
+import java.util.Scanner;
+
 public class Exercise15 {
+    public static int getIntegerInput(String prompt){
+        Scanner console = new Scanner(System.in);
+        int input;
+        do {
+            System.out.print(prompt);
+            input = console.nextInt();
+        } while (input < 1);
+        return input;
+    }
+
+    public static void main(String[] args) {
+        int input = getIntegerInput("Please enter a positive integer: ");
+        for (int i = 1; i <= input; i++){
+            if (i % 3 > 0 && i % 5 > 0)
+                System.out.println(i);
+            else {
+                System.out.print((i % 3 == 0)? "Fizz " : "");
+                System.out.print((i % 5 == 0)? "Buzz\n" : "\n");
+            }
+        }
+    }
     /* FIZZ BUZZ
 
     Historically, the Fizz Buzz (https://en.wikipedia.org/wiki/Fizz_buzz) problem was used in programming interviews.

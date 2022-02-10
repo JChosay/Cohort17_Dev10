@@ -1,5 +1,6 @@
-public class Exercise12 {
+import java.util.Scanner;
 
+public class Exercise12 {
     // 1. Create a method.
     // Name: readRequiredString
     // Inputs: String
@@ -9,6 +10,15 @@ public class Exercise12 {
     //
     // See the readRequiredString implementation in the methods lesson.
     // You can definitely improve it. Make sure you don't allow blank input. Checking the length() is not enough.
+    public static String readRequiredString(String prompt){
+        Scanner console = new Scanner(System.in);
+        String input;
+        do {
+            System.out.print(prompt);
+            input = console.nextLine();
+        } while (input.isBlank());
+        return input;
+    }
 
     // 2. Create a method.
     // Name: printNounPhrase
@@ -17,11 +27,16 @@ public class Exercise12 {
     // Description: prints an adjective + noun phrase to the console based on user input.
     // Internally, prompts a user for an adjective and a noun with readRequiredString.
     // Concatenates adjective and noun and prints it to the console.
+    public static void printNounPhrase(){
+        String adjective = readRequiredString("Please enter an adjective: ");
+        String noun = readRequiredString("Please enter a noun: ");
+        System.out.printf("Your phrase is: %s %s\n\n", adjective, noun);
+    }
 
     public static void main(String[] args) {
         // 3. Uncomment the code below and confirm it works.
-        // printNounPhrase();
-        // printNounPhrase();
-        // printNounPhrase();
+         printNounPhrase();
+         printNounPhrase();
+         printNounPhrase();
     }
 }
