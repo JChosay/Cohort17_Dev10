@@ -15,21 +15,19 @@ public class Exercise16 {
         int oneIndex = 0, twoIndex = 0, combinedIndex = 0;
 
         // mergesort
-        while (combinedIndex < combined.length)
+        while (oneIndex < one.length && twoIndex < two.length)
         {
-            if (oneIndex < one.length && twoIndex < two.length) {
-                if (one[oneIndex] < two[twoIndex])
-                    combined[combinedIndex++] = one[oneIndex++];
-                else
-                    combined[combinedIndex++] = two[twoIndex++];
-            } else {
-                // add any remaining elements to array
-                if (oneIndex < one.length)
-                    combined[combinedIndex++] = one[oneIndex++];
-                else
-                    combined[combinedIndex++] = two[twoIndex++];
-            }
-        }
+            if (one[oneIndex] < two[twoIndex])
+                combined[combinedIndex++] = one[oneIndex++];
+            else
+                combined[combinedIndex++] = two[twoIndex++];
+        };
+        // add any remaining elements to array
+        if (oneIndex < one.length)
+            System.arraycopy(one, oneIndex, combined, combinedIndex, one.length - oneIndex);
+        else
+            System.arraycopy(two, twoIndex, combined, combinedIndex, two.length - twoIndex);
+
 
         for (int i = 0; i < combined.length; i++)
             System.out.println(combined[i]);
