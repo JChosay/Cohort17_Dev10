@@ -1,41 +1,45 @@
+package classes;
+
 import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
-public class mainFile {
-    private static String[] capsuleBooking;
+public class Hotel {
+    private final String name;
+    private final int capacity;
+    private static Guest[] capsuleBooking;
 
-    // Get string input from user and check that the input is not empty/blank
-    public static String getStringInput(String prompt){
-        Scanner console = new Scanner(System.in);
-        String input;
-        do {
-            System.out.print(prompt);
-            input = console.nextLine();
-        } while (input.isBlank());
-        return input;
+    public Hotel(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+        capsuleBooking = new Guest[capacity];
+        for (int i = 0; i < capsuleBooking.length; i++)
+            capsuleBooking[i] = new Guest();
     }
 
-    // Get integer input from user
-    public static int getIntegerInput(String prompt){
-        Scanner console = new Scanner(System.in);
-        int input = 0;
-        do {
-            // Try catch to make sure that the user can only enter positive numbers.
-            try {
-                System.out.print(prompt);
-                input = console.nextInt();
-            } catch (InputMismatchException e){
-                System.out.println("Invalid Input. Try again.\n");
-                console.nextLine();
-            }
-        } while (input <= 0);
-        return input;
+    public static boolean mainMenu(){
+        int input = CustomScanner.getIntegerInput("\nMain Menu\n=========\n" +
+                "1. Check In\n2. Check Out\n3. View Guests\n4. Exit\n" +
+                "Choose on option [1 - 4]: ");
+        switch (input) {
+            case 1:
+                checkIn();
+                return false;
+            case 2:
+                checkOut();
+                return false;
+            case 3:
+                viewGuests();
+                return false;
+            case 4:
+                return confirmExit();
+            default:
+                System.out.println("Invalid input! Please try again.");
+                return false;
+        }
     }
 
     // Ask if user wants to exit program and confirm their decision
     public static boolean confirmExit(){
-        if (getStringInput("\nExit Menu\n=========\n" +
+        if (CustomScanner.getStringInput("\nExit Menu\n=========\n" +
                 "Are you sure you want to exit?\nAll data will be lost.\n" +
                 "Exit [y / n]: ").equalsIgnoreCase("y")) {
             System.out.println("Exiting...\nGoodbye.");
@@ -45,33 +49,44 @@ public class mainFile {
             return false;
     }
 
-    // Set the capacity of the hotel
-    public static int initializeHotelCapacity (){
-        String prompt = "Welcome to Capsule Hotel\n========================\nEnter the number of capsules available: ";
-        return getIntegerInput(prompt);
-    }
-
     // Set a string input for the name of the guest and get an integer for a desired open room to book a guest to.
     public static void checkIn(){
         // Check if there is any empty room.
-        if (Arrays.asList(capsuleBooking).contains(null)) {
+        boolean emptyCapsule = false;
+        try {
+            for (Guest guest : capsuleBooking) {
+                if (guest.getGuestName().equalsIgnoreCase("unoccupied")) {
+                    // Empty room found.
+                    emptyCapsule = true;
+                    break;
+                }
+            }
+        } catch (NullPointerException e){
+            System.out.println("Error!\nNull Pointer value found. Originated from the method: CheckIn().");
+            emptyCapsule = emptyCapsule ? true : false;
+        }
+        if (emptyCapsule) {
             boolean checkingIn = true;
-            String inputName = getStringInput("\nCheck In Menu\n=============\nGuest Name: ");
+            String inputName = CustomScanner.getStringInput("\nCheck In Menu\n=============\nGuest Name: ");
             int inputRoom;
 
             do {
                 System.out.printf("Capsule #[1 - %d]", capsuleBooking.length);
-                inputRoom = getIntegerInput(": ");
+                inputRoom = CustomScanner.getIntegerInput(": ");
 
                 // Check if the input for room is a valid input/in range.
                 if (inputRoom >= 1 && inputRoom <= capsuleBooking.length) {
                     // Check if the room is available or occupied.
-                    if (capsuleBooking[inputRoom - 1] == null) {
-                        capsuleBooking[inputRoom - 1] = inputName;
-                        System.out.printf("%s is now checked into room %d!\n", inputName, inputRoom);
-                        checkingIn = false;
-                    } else {
-                        System.out.println("Sorry!\nThat room is occupied. Try again!\n");
+                    try {
+                        if (!capsuleBooking[inputRoom - 1].getGuestName().equalsIgnoreCase("unoccupied"))
+                            System.out.println("Sorry!\nThat room is occupied. Try again!\n");
+                        else {
+                            capsuleBooking[inputRoom - 1].setGuestName(inputName);
+                            System.out.printf("%s is now checked into room %d!\n", inputName, inputRoom);
+                            checkingIn = false;
+                        }
+                    } catch (NullPointerException e){
+                        System.out.println("Error!\nNull Pointer value found. Originated from the method: checkIn().");
                     }
                 }
                 else
@@ -85,12 +100,19 @@ public class mainFile {
     public static void checkOut(){
         // Check if there is a room occupied.
         boolean occupiedCapsule = false;
-        for (String s : capsuleBooking) {
-            if (s != null) {
-                occupiedCapsule = true;
-                break;
+        try {
+            for (Guest guest : capsuleBooking) {
+                if (!guest.getGuestName().equalsIgnoreCase("unoccupied")) {
+                    // Occupied room found.
+                    occupiedCapsule = true;
+                    break;
+                }
             }
+        } catch (NullPointerException e){
+            System.out.println("Error!\nNull Pointer value found. Originated from the method: checkOut().");
+            occupiedCapsule = occupiedCapsule ? true : false;
         }
+
         if (occupiedCapsule) {
             boolean checkingOut = true;
             System.out.println("\nCheck Out Menu\n==============");
@@ -99,7 +121,7 @@ public class mainFile {
             // Get integer of guest's room number to check out.
             do {
                 System.out.printf("Capsule #[1 - %d]", capsuleBooking.length);
-                inputRoom = getIntegerInput(": ");
+                inputRoom = CustomScanner.getIntegerInput(": ");
 
                 // Check if the input for room is a valid input/in range.
                 if (inputRoom >= 1 && inputRoom <= capsuleBooking.length) {
@@ -128,7 +150,7 @@ public class mainFile {
         // Get integer of room number to view around.
         do {
             System.out.printf("Capsule #[1 - %d]", capsuleBooking.length);
-            inputRoom = getIntegerInput(": ");
+            inputRoom = CustomScanner.getIntegerInput(": ");
 
             // Check if the input for room is a valid input/in range.
             if (inputRoom >= 1 && inputRoom <= capsuleBooking.length) {
@@ -140,42 +162,11 @@ public class mainFile {
 
                 // Print the room and guest name
                 for (int i = start; i < end; i++)
-                    System.out.printf("%d: %s\n", (i + 1), capsuleBooking[i]);
+                    System.out.printf("%d: %s\n", (i + 1), capsuleBooking[i].getGuestName());
                 gettingRoomNum = false;
             }
             else
                 System.out.println("Invalid input! Try again.\n");
         } while (gettingRoomNum);
-    }
-
-    public static boolean mainMenu(){
-        int input = getIntegerInput("\nMain Menu\n=========\n" +
-                "1. Check In\n2. Check Out\n3. View Guests\n4. Exit\n" +
-                "Choose on option [1 - 4]: ");
-        switch (input) {
-            case 1:
-                checkIn();
-                return false;
-            case 2:
-                checkOut();
-                return false;
-            case 3:
-                viewGuests();
-                return false;
-            case 4:
-                return confirmExit();
-            default:
-                System.out.println("Invalid input! Please try again.");
-                return false;
-        }
-    }
-
-    public static void main(String[] args) {
-        int hotelCapacity = initializeHotelCapacity();
-        capsuleBooking = new String[hotelCapacity];
-        boolean exitProgram;
-        do{
-            exitProgram = mainMenu();
-        } while (!exitProgram);
     }
 }
