@@ -30,7 +30,6 @@ public class Exercise07 {
     }
 
     static MoneyStorage getStorage() {
-
         System.out.println("Choose a place to store your money:");
         System.out.println("1. Wallet");
         System.out.println("2. Mortgage");
@@ -39,7 +38,7 @@ public class Exercise07 {
 
         String input;
         do {
-            System.out.print("Select [1-4]:");
+            System.out.print("Select [1-4]: ");
             input = console.nextLine();
         } while (!(input.length() == 1 && input.charAt(0) >= '1' && input.charAt(0) <= '4'));
 
@@ -51,7 +50,37 @@ public class Exercise07 {
         // - description for a Wallet
         // - accountNumber for Mortgage and BankAccount
         // - for Vault?
-
+        double balance;
+        String stringInput;
+        switch (input){
+            case "1":
+                System.out.print("Please enter the starting balance for the Wallet: ");
+                balance = Double.parseDouble(console.nextLine());
+                System.out.print("Please enter the description for the Wallet: ");
+                stringInput = console.nextLine();
+                return new Wallet(balance, stringInput);
+            case "2":
+                System.out.print("Please enter the starting balance for the Mortgage: ");
+                balance = Double.parseDouble(console.nextLine());
+                System.out.print("Please enter the account number for the Mortgage: ");
+                stringInput = console.nextLine();
+                return new Mortgage(balance, stringInput);
+            case "3":
+                System.out.print("Please enter the starting balance for the Vault: ");
+                balance = Double.parseDouble(console.nextLine());
+                System.out.print("Please enter the Vault Id for the Vault: ");
+                stringInput = console.nextLine();
+                return new Vault(balance, stringInput);
+            case "4":
+                System.out.print("Please enter the starting balance for the Bank Account: ");
+                balance = Double.parseDouble(console.nextLine());
+                System.out.print("Please enter the account number for the Bank Account: ");
+                stringInput = console.nextLine();
+                return new BankAccount(balance, stringInput);
+            default:
+                System.out.println("Error! In getStorage(), default was executed unexpectedly.");
+                break;
+        }
         // 3. Return the Wallet, Mortgage, Vault, or Bank Account instead of null.
         return null;
     }

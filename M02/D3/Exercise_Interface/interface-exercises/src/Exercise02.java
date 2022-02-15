@@ -33,5 +33,4 @@ public class Exercise02 {
             storage.deposit(amount);
         }
     }
-
 }
