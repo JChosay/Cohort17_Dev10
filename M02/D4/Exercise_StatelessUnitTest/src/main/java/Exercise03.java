@@ -13,6 +13,7 @@ public class Exercise03 {
      * @return true if the value contains all 5 vowels, false if it doesn't
      */
     static boolean hasAllVowels(String value) {
-        return false;
+        return (value == null) ? false :
+                (value.contains("a") && value.contains("e") && value.contains("i") && value.contains("o") && value.contains("u")) ? true : false;
     }
 }

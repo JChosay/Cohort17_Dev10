@@ -1,15 +1,26 @@
 public class Hero {
 
     private final String name;
-    private final char symbol = '@';
+    private char symbol = '@';
     private int x;
     private int y;
+    private int lightRange = 1;
+    private int visionRange = lightRange + 1;
 
     // Create a hero with a name and an initial position.
     public Hero(String name, int x, int y) {
         this.name = name;
         this.x = x;
         this.y = y;
+    }
+    public void setSymbol(char input) { this.symbol = input; }
+    public void setLightRange(int input) { this.lightRange = input; }
+    public void setVisionRange(int input) { this.visionRange = input; }
+    public int getVisionRange() {
+        return visionRange;
+    }
+    public int getLightRange() {
+        return lightRange;
     }
 
     // getters
